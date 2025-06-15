@@ -1,0 +1,44 @@
+services:
+  db:  # define a service that handles the Postgres database
+    image: postgres:17
+    container_name: bp_postgres
+    environment:
+      POSTGRES_DB: batch_db
+      POSTGRES_USER: batch_user
+      POSTGRES_PASSWORD: batch_pass
+    volumes:  # define a database volume
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  data-setup: # define a service that generates the test data
+    image: batch_app
+    container_name: bp_data
+    command: [ "python", "-m", "tests.create_test_data" ]  # execute the script to generate test data
+    volumes: # use the same volume so that the data is available in app and data-setup
+      - source_volume:/app/tests/fixtures/images
+    environment:
+      - DOCKER_CONTAINER=true
+  app:  # define the main service that executes the flask app
+    image: batch_app
+    container_name: bp_app
+    volumes:  # bind three volumes to make data persistent
+      - source_volume:/app/tests/fixtures/images
+      - data_volume:/app/data
+      - model_volume:/app/model
+    environment:  # set environment variables to define the paths within the container
+      - DB_URI=postgresql://batch_user:batch_pass@db:5432/batch_db
+      - SOURCE_DIR=/app/tests/fixtures/images
+      - TARGET_DIR=/app/data/incoming_images
+      - PROCESSED_DIR=/app/data/processed_images
+      - MODEL_DIR=/app/model
+      - FLASK_RUN_HOST=0.0.0.0
+      - DOCKER_CONTAINER=true
+    ports:
+      - "4000:5000"  # forward host-port 4000 to container port 5000
+    command: ["python", "-m", "src.api.run"]  # starts the Flask app
+
+volumes:  # define four persistent volumes which are automatically created
+  pgdata:
+  source_volume:
+  data_volume:
+  model_volume:

@@ -1,0 +1,19 @@
+flask:
+  host: "localhost"
+  port: 5001
+
+directories:
+  source_directory: "/Users/christopherfuchs/git-local/BatchProducts/tests/fixtures/images"
+  target_directory: "/Users/christopherfuchs/git-local/BatchProducts/tests/fixtures/incoming_images"
+  processed_directory: "/Users/christopherfuchs/git-local/BatchProducts/tests/fixtures/incoming_images/processed"
+
+db_path: "/Users/christopherfuchs/git-local/BatchProducts/tests/fixtures/test_image_classifications.db"
+
+model_path: "/Users/christopherfuchs/git-local/BatchProducts/model/trained_enet_0.onnx"
+
+batch:
+  min_images_per_run: 1
+  max_images_per_run: 10
+
+train_data:
+  path: "/Users/christopherfuchs/git-local/BatchProducts/src/model/model_training/data"

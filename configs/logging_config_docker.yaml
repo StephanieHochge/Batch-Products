@@ -1,0 +1,50 @@
+version: 1
+disable_existing_loggers: false
+
+# root logger (in case neither app_logger, nor trigger_logger is used.)
+root:
+  level: INFO
+  handlers:
+    - console
+
+# logger for specific components
+loggers:
+  app_logger:
+    level: INFO
+    handlers:
+      - app_file_handler
+    propagate: false
+
+  trigger_logger:
+    level: DEBUG
+    handlers:
+      - trigger_file_handler
+    propagate: false
+
+# define handlers
+handlers:
+  app_file_handler:
+    class: logging.FileHandler
+    level: INFO
+    formatter: detailed
+    filename: "/app/data/logs/app.log"
+
+  trigger_file_handler:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: detailed
+    filename: "/app/data/logs/trigger.log"
+
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout  # stream for standard output (e.g., in the console)
+
+# define formatter
+formatters:
+  detailed:
+    format: "[%(asctime)s] %(levelname)s in %(module)s: %(message)s"
+
+  simple:
+    format: "[%(levelname)s] %(message)s"

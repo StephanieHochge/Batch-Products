@@ -1,0 +1,16 @@
+tests/fixtures/images
+tests/fixtures/test_image_classifications.db
+configs/app_config.yaml
+configs/logging_config.yaml
+data/incoming_images
+data/processed_images
+data/image_classifications.db
+data/logs
+src/model/model_training
+.venv
+.git
+.pytest_cache
+.idea
+.ipynb_checkpoints
+.gitignore
+try.py

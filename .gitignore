@@ -1,0 +1,12 @@
+/fashion-dataset/
+/try.py
+/fashion_mnist_dataset.pt
+/data/FashionMNIST/
+/src/model/model_training/fashion-product-images-dataset.zip
+/src/model/model_training/fashion_mnist_dataset.pt
+/src/model/model_training/data/
+/src/model/model_training/.ipynb_checkpoints/
+/tests/fixtures/
+/data/
+.idea/
+.ipynb_checkpoints/

@@ -1,0 +1,16 @@
+flask:
+  host: "0.0.0.0"  # docker uses 0.0.0.0 instead of "localhost"
+  port: 5000
+
+directories:
+  source_directory: "/app/tests/fixtures/images"
+  target_directory: "/app/data/incoming_images"
+  processed_directory: "/app/data/processed_images"
+
+db_path: postgresql://batch_user:batch_pass@db:5432/batch_db
+
+model_path: "/app/model/trained_enet_0.onnx"
+
+batch:
+  min_images_per_run: 5
+  max_images_per_run: 100
