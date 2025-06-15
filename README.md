@@ -34,7 +34,7 @@ To run the app locally or with Docker/Jenkins, the following requirements must b
 
 1. **Clone the Repository:**
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/StephanieHochge/Batch-Products.git
    cd <your-project-folder>
    ```
 
